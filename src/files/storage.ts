@@ -6,7 +6,7 @@ const generateId = () =>
     .map(() => Math.round(Math.random() * 16).toString(16))
     .join();
 
-const normallizeFileName = (req, file, callback) => {
+const normalizeFileName = (req, file, callback) => {
   const fileExtName = file.originalname.split('.').pop();
 
   callback(null, `${generateId()}.${fileExtName}`);
@@ -14,5 +14,5 @@ const normallizeFileName = (req, file, callback) => {
 
 export const fileStorage = diskStorage({
   destination: './uploads',
-  filename: normallizeFileName,
+  filename: normalizeFileName,
 });
