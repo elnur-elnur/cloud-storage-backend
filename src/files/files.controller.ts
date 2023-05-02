@@ -16,9 +16,10 @@ import { CreateFileDto } from './dto/create-file.dto';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileStorage } from './storage';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
-import { UserId } from 'src/decarators/user-id.decarator';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+
 import { Filetype } from './entities/file.entity';
+import { UserId } from 'src/decarators/user-id.decarator';
 
 @Controller('files')
 @ApiTags('files')
@@ -57,9 +58,9 @@ export class FilesController {
       }),
     )
     file: Express.Multer.File,
-    @UserId() UserId: number,
+    @UserId() userId: number,
   ) {
-    return this.filesService.create(file, UserId);
+    return this.filesService.create(file, userId);
   }
 
   @Delete()

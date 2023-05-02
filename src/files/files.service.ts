@@ -20,7 +20,7 @@ export class FilesService {
     }
 
     if (fileType === Filetype.TRASH) {
-      qb.withDeleted().andWhere('file.deletedAt IS NOT FULL');
+      qb.withDeleted().andWhere('file.deletedAt IS NOT NULL');
     }
 
     return qb.getMany();
@@ -40,9 +40,10 @@ export class FilesService {
     const idsArray = ids.split(',');
 
     const qb = this.repository.createQueryBuilder('file');
+
     qb.where('id IN (:...ids) AND userId = :userId', {
-      userId,
       ids: idsArray,
+      userId,
     });
 
     return qb.softDelete().execute();
