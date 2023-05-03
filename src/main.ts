@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
   app.enableCors({ credentials: true, origin: true });
 
-  app.use('/uploads', express.static(join(__dirname, '..', 'Uploads')));
+  app.use('/Uploads', express.static(join(__dirname, '..', 'Uploads')));
 
   const config = new DocumentBuilder()
     .setTitle('Storage')
